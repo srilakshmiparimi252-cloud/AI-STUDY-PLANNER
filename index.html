@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Study Planner</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>AI Study Planner</h1>
+    <p>Plan your studies and track your progress.</p>
+
+    <div>
+        <select id="subject">
+            <option value="">Select Subject</option>
+            <option value="C Programming">C Programming</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+            <option value="AI Tools">AI Tools</option>
+        </select>
+
+        <input type="date" id="date">
+        <input type="time" id="time">
+
+        <button id="addTask">Add Study Task</button>
+    </div>
+
+    <div id="taskList"></div>
+
+    <section id="ai-doubt-solver">
+        <h2>🤖 AI Doubt Solver</h2>
+
+        <textarea
+            id="doubtQuestion"
+            placeholder="Type your subject doubt here..."
+            rows="4"
+        ></textarea>
+
+        <br><br>
+
+        <button id="askAI">Ask AI</button>
+        <p id="aiAnswer"></p>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
