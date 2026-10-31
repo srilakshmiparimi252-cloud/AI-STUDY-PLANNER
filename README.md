@@ -1,32 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Study Planner</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>📚 AI Study Planner</h1>
-  <p>Plan your studies and solve your doubts with AI.</p>
 
-  <h2>Add Study Task</h2>
-  <select id="subject">
-    <option>C Programming</option>
-    <option>Mathematics</option>
-    <option>Physics</option>
-    <option>AI Tools</option>
-  </select>
-  <input type="date" id="taskDate">
-  <input type="time" id="taskTime">
-  <button id="addTask">Add Study Task</button>
-  <ul id="taskList"></ul>
+# 📚 AI Study Planner
 
-  <h2>🤖 AI Doubt Solver</h2>
-  <textarea id="doubtQuestion" placeholder="Ask your question"></textarea>
-  <button id="askAI">Ask AI</button>
-  <p id="answer"></p>
+An AI-powered study companion designed to help students organize their learning and clear their academic doubts.
 
-  <script src="script.js"></script>
-</body>
-</html>
+## 🌟 Features
+- Create and manage study tasks.
+- Organize tasks by subject, date, and time.
+- Ask academic questions using the AI Doubt Solver.
+- Simple and student-friendly interface.
+
+## 🚀 Live Demo
+[Open AI Study Planner](https://open-ai-study-planner.onrender.com)
+
+## 🛠️ Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Node.js
+- Express.js
+- Groq AI API
+
+## 👩‍💻 Created By
+**Sri Lakshmi Parimi**
+
+First-year B.Tech CSE-AIML Student
+
+---
+
+*Learn better. Plan smarter. Grow with AI.* 💜
