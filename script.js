@@ -1,86 +1,95 @@
 
-const API_URL = "https://ai-study-planner-api-ti9f.onrender.com/ask";
+// ------------------------------
+// 1. STUDY PLANNER
+// ------------------------------
 
-// Welcome screen → Dashboard
-const getStarted = document.getElementById("getStarted");
-const welcomeScreen = document.getElementById("welcomeScreen");
-const appDashboard = document.getElementById("appDashboard");
+const button = document.querySelector("#addTask");
+const taskList = document.querySelector("#taskList");
 
-if (getStarted) {
-    getStarted.addEventListener("click", () => {
-        welcomeScreen.hidden = true;
-        appDashboard.hidden = false;
-    });
-}
+button.addEventListener("click", function () {
+    const subject = document.querySelector("#subject").value;
+    const date = document.querySelector("#date").value;
+    const time = document.querySelector("#time").value;
 
-// Add Study Task
-const addTaskButton = document.getElementById("addTask");
-const taskList = document.getElementById("taskList");
+    if (subject === "" || date === "" || time === "") {
+        alert("Please select subject, date and time.");
+        return;
+    }
 
-if (addTaskButton) {
-    addTaskButton.addEventListener("click", () => {
-        const subject = document.getElementById("subject").value;
-        const date = document.getElementById("date").value;
-        const time = document.getElementById("time").value;
+    const taskBox = document.createElement("div");
 
-        if (!subject || !date || !time) {
-            alert("Please select subject, date and time.");
-            return;
+    taskBox.innerHTML = `
+        <p>
+            📚 <b>${subject}</b><br>
+            📅 Date: ${date}<br>
+            ⏰ Time: ${time}
+        </p>
+    `;
+
+    taskList.appendChild(taskBox);
+});
+
+
+// ------------------------------
+// 2. AI DOUBT SOLVER
+// ------------------------------
+
+const askAIButton = document.querySelector("#askAI");
+const doubtQuestion = document.querySelector("#doubtQuestion");
+const aiAnswer = document.querySelector("#aiAnswer");
+
+askAIButton.addEventListener("click", async function () {
+
+    const question = doubtQuestion.value.trim();
+
+    if (question === "") {
+        alert("Please type your doubt first.");
+        return;
+    }
+
+    aiAnswer.textContent = "Thinking... Please wait.";
+    askAIButton.disabled = true;
+
+    try {
+        const response = await fetch("https://ai-study-planner-api-ti9f.onrender.com/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question: question
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Something went wrong.");
         }
 
-        const task = document.createElement("div");
-        task.className = "task-item";
-        task.textContent = `${subject} - ${date} at ${time}`;
+        aiAnswer.textContent = data.answer;
 
-        taskList.appendChild(task);
+    } catch (error) {
+        aiAnswer.textContent =
+            "Could not get an answer. Please check the server and API key.";
 
-        document.getElementById("subject").value = "";
-        document.getElementById("date").value = "";
-        document.getElementById("time").value = "";
-    });
-}
+        console.error(error);
 
-// AI Doubt Solver
-const askAIButton = document.getElementById("askAI");
+    } finally {
+        askAIButton.disabled = false;
+    }
+});
 
-if (askAIButton) {
-    askAIButton.addEventListener("click", async () => {
-        const question = document.getElementById("doubtQuestion").value.trim();
-        const answerBox = document.getElementById("aiAnswer");
 
-        if (!question) {
-            answerBox.textContent = "Please type your question first.";
-            return;
-        }
+// ------------------------------
+// 3. GET STARTED BUTTON
+// ------------------------------
 
-        answerBox.textContent = "AI is thinking...";
+const getStartedButton = document.querySelector("#getStarted");
+const welcomeScreen = document.querySelector("#welcomeScreen");
+const appDashboard = document.querySelector("#appDashboard");
 
-        askAIButton.disabled = true;
-
-        try {
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ question: question })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || "Server error");
-            }
-
-            answerBox.textContent =
-                data.answer || data.message || "No answer received.";
-
-        } catch (error) {
-            console.error("AI Error:", error);
-            answerBox.textContent =
-                "Could not get an answer. Please try again later.";
-        } finally {
-            askAIButton.disabled = false;
-        }
-    });
-}
+getStartedButton.addEventListener("click", function () {
+    welcomeScreen.hidden = true;
+    appDashboard.hidden = false;
+});
