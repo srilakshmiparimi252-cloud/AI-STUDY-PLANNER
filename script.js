@@ -1,66 +1,86 @@
-const button = document.querySelector("#addTask");
-const taskList = document.querySelector("#taskList");
 
-button.addEventListener("click", function () {
+const API_URL = "https://ai-study-planner-api-ti9f.onrender.com/ask";
 
-    let subject = document.querySelector("#subject").value;
-    let date = document.querySelector("#date").value;
-    let time = document.querySelector("#time").value;
+// Welcome screen → Dashboard
+const getStarted = document.getElementById("getStarted");
+const welcomeScreen = document.getElementById("welcomeScreen");
+const appDashboard = document.getElementById("appDashboard");
 
-    if (subject === "" || date === "" || time === "") {
-        alert("Please select subject, date and time.");
-        return;
-    }
+if (getStarted) {
+    getStarted.addEventListener("click", () => {
+        welcomeScreen.hidden = true;
+        appDashboard.hidden = false;
+    });
+}
 
-    let taskBox = document.createElement("div");
+// Add Study Task
+const addTaskButton = document.getElementById("addTask");
+const taskList = document.getElementById("taskList");
 
-    taskBox.innerHTML = `
-        <p>
-            📚 <b>${subject}</b><br>
-            📅 Date: ${date}<br>
-            ⏰ Time: ${time}
-        </p>
-    `;
+if (addTaskButton) {
+    addTaskButton.addEventListener("click", () => {
+        const subject = document.getElementById("subject").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
 
-    taskList.appendChild(taskBox);
-});
-
-const askAIButton = document.querySelector("#askAI");
-const doubtQuestion = document.querySelector("#doubtQuestion");
-const aiAnswer = document.querySelector("#aiAnswer");
-
-askAIButton.addEventListener("click", async function () {
-    const question = doubtQuestion.value.trim();
-
-    if (question === "") {
-        alert("Please type your doubt first.");
-        return;
-    }
-
-    aiAnswer.textContent = "Thinking... Please wait.";
-    askAIButton.disabled = true;
-
-    try {
-        const response = await fetch("http://localhost:3001/ask", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ question: question })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.error || "Something went wrong.");
+        if (!subject || !date || !time) {
+            alert("Please select subject, date and time.");
+            return;
         }
 
-        aiAnswer.textContent = data.answer;
-    } catch (error) {
-        aiAnswer.textContent =
-            "Could not get an answer. Please check the server and API key.";
-        console.error(error);
-    } finally {
-        askAIButton.disabled = false;
-    }
-});
+        const task = document.createElement("div");
+        task.className = "task-item";
+        task.textContent = `${subject} - ${date} at ${time}`;
+
+        taskList.appendChild(task);
+
+        document.getElementById("subject").value = "";
+        document.getElementById("date").value = "";
+        document.getElementById("time").value = "";
+    });
+}
+
+// AI Doubt Solver
+const askAIButton = document.getElementById("askAI");
+
+if (askAIButton) {
+    askAIButton.addEventListener("click", async () => {
+        const question = document.getElementById("doubtQuestion").value.trim();
+        const answerBox = document.getElementById("aiAnswer");
+
+        if (!question) {
+            answerBox.textContent = "Please type your question first.";
+            return;
+        }
+
+        answerBox.textContent = "AI is thinking...";
+
+        askAIButton.disabled = true;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ question: question })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Server error");
+            }
+
+            answerBox.textContent =
+                data.answer || data.message || "No answer received.";
+
+        } catch (error) {
+            console.error("AI Error:", error);
+            answerBox.textContent =
+                "Could not get an answer. Please try again later.";
+        } finally {
+            askAIButton.disabled = false;
+        }
+    });
+}
