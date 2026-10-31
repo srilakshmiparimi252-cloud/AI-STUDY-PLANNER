@@ -1,46 +1,80 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Study Planner</title>
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AI Study Planner</h1>
-    <p>Plan your studies and track your progress.</p>
 
-    <div>
-        <select id="subject">
-            <option value="">Select Subject</option>
-            <option value="C Programming">C Programming</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="Physics">Physics</option>
-            <option value="AI Tools">AI Tools</option>
-        </select>
+    <!-- Welcome Screen -->
+    <section id="welcomeScreen" class="welcome-screen">
+        <h1>📚 AI Study Planner</h1>
+        <p>Plan smarter. Learn better. Achieve more.</p>
 
-        <input type="date" id="date">
-        <input type="time" id="time">
+        <div class="features">
+            <div class="feature-card">
+                <h3>📅 Study Planner</h3>
+                <p>Organize your daily study tasks.</p>
+            </div>
 
-        <button id="addTask">Add Study Task</button>
-    </div>
+            <div class="feature-card">
+                <h3>🤖 AI Doubt Solver</h3>
+                <p>Get help with your academic doubts.</p>
+            </div>
 
-    <div id="taskList"></div>
+            <div class="feature-card">
+                <h3>🎯 Track Progress</h3>
+                <p>Stay focused on your learning goals.</p>
+            </div>
+        </div>
 
-    <section id="ai-doubt-solver">
-        <h2>🤖 AI Doubt Solver</h2>
+        <button id="getStarted" class="start-button">
+            Get Started
+        </button>
 
-        <textarea
-            id="doubtQuestion"
-            placeholder="Type your subject doubt here..."
-            rows="4"
-        ></textarea>
-
-        <br><br>
-
-        <button id="askAI">Ask AI</button>
-        <p id="aiAnswer"></p>
+        <p>Designed by Sri Lakshmi Parimi</p>
     </section>
+
+    <!-- Main Dashboard -->
+    <main id="appDashboard" hidden>
+        <h1>📚 AI Study Planner</h1>
+        <p>Plan your studies and track your progress.</p>
+
+        <div>
+            <select id="subject">
+                <option value="">Select Subject</option>
+                <option value="C Programming">C Programming</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physics">Physics</option>
+                <option value="AI Tools">AI Tools</option>
+            </select>
+
+            <input type="date" id="date">
+            <input type="time" id="time">
+
+            <button id="addTask">Add Study Task</button>
+        </div>
+
+        <div id="taskList"></div>
+
+        <section id="ai-doubt-solver">
+            <h2>🤖 AI Doubt Solver</h2>
+
+            <textarea
+                id="doubtQuestion"
+                placeholder="Type your subject doubt here..."
+                rows="4"
+            ></textarea>
+
+            <br><br>
+
+            <button id="askAI">Ask AI</button>
+            <p id="aiAnswer"></p>
+        </section>
+    </main>
 
     <script src="script.js"></script>
 </body>
