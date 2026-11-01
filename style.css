@@ -1,9 +1,58 @@
+
+/* Main Website */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #100b24;
+    color: white;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: #1c1238;
+    padding: 22px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #49346e;
+}
+
+header h1 {
+    color: #c4a2ff;
+    font-size: 26px;
+}
+
+/* Main Section */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+h2 {
+    color: #d5bdff;
+    margin-bottom: 20px;
+}
+
+/* Cards */
 .feature {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #241744;
+    border: 1px solid #624795;
     padding: 22px;
     border-radius: 15px;
     width: 220px;
+    transition: 0.3s;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    background: #32205b;
 }
 
 .feature span {
@@ -12,5 +61,64 @@
 
 .feature p {
     margin-top: 10px;
+    color: #eee5ff;
+}
+
+/* Buttons */
+button {
+    background: #8954db;
     color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 8px 5px;
+}
+
+button:hover {
+    background: #a477ef;
+}
+
+/* Inputs */
+input, textarea, select {
+    width: 100%;
+    padding: 13px;
+    margin: 10px 0;
+    border: 1px solid #624795;
+    border-radius: 8px;
+    background: #1c1238;
+    color: white;
+    font-size: 15px;
+}
+
+input:focus, textarea:focus {
+    outline: 2px solid #a477ef;
+}
+
+/* Content Cards */
+.card {
+    background: #1c1238;
+    border: 1px solid #49346e;
+    border-radius: 14px;
+    padding: 22px;
+    margin: 18px 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    header {
+        padding: 18px;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .container {
+        width: 94%;
+        margin: 25px auto;
+    }
+
+    .feature {
+        width: 100%;
+    }
 }
