@@ -61,3 +61,17 @@ app.post("/ask", async (req, res) => {
 app.listen(3001, () => {
     console.log("AI backend running at http://localhost:3001");
 });
+// GET STARTED BUTTON
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const getStartedButton = document.querySelector("#getStarted");
+    const welcomeScreen = document.querySelector("#welcomeScreen");
+    const appDashboard = document.querySelector("#appDashboard");
+
+    getStartedButton.addEventListener("click", function () {
+        welcomeScreen.hidden = true;
+        appDashboard.hidden = false;
+    });
+
+});
