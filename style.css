@@ -246,3 +246,7 @@ body {
         max-width: 320px;
     }
 }
+#welcomeScreen[hidden],
+#appDashboard[hidden] {
+    display: none !important;
+}
