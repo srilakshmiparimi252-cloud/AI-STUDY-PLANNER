@@ -63,15 +63,22 @@ app.listen(3001, () => {
 });
 // GET STARTED BUTTON
 
-document.addEventListener("DOMContentLoaded", function () {
+const getStartedButton = document.getElementById("getStarted");
+const welcomeScreen = document.getElementById("welcomeScreen");
+const appDashboard = document.getElementById("appDashboard");
 
-    const getStartedButton = document.querySelector("#getStarted");
-    const welcomeScreen = document.querySelector("#welcomeScreen");
-    const appDashboard = document.querySelector("#appDashboard");
+if (getStartedButton && welcomeScreen && appDashboard) {
 
     getStartedButton.addEventListener("click", function () {
-        welcomeScreen.hidden = true;
+
+        welcomeScreen.style.display = "none";
         appDashboard.hidden = false;
+        appDashboard.style.display = "block";
+
+        console.log("Dashboard opened successfully!");
+
     });
 
-});
+} else {
+    console.error("Get Started elements not found!");
+}
